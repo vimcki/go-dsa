@@ -22,7 +22,7 @@ func Test() {
 	b := bubble.New()
 	test("Bubble Sort", b)
 	m := merge.New()
-	test("Merge sort", m, "s2")
+	test("Merge sort", m)
 }
 
 func test(name string, s sorter, tests ...string) {

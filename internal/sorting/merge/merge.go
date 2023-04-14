@@ -1,7 +1,5 @@
 package merge
 
-import "fmt"
-
 type MergeSorter struct{}
 
 func New() *MergeSorter {
@@ -23,7 +21,6 @@ func sort(list []int, low, hi int) {
 }
 
 func merge(list []int, low, mid, hi int) {
-	fmt.Println(list, low, mid, hi)
 	left := make([]int, mid-low)
 	right := make([]int, hi-mid)
 	for i := 0; i < mid-low; i++ {
@@ -33,33 +30,27 @@ func merge(list []int, low, mid, hi int) {
 		right[i] = list[mid+i]
 	}
 
-	fmt.Println(left, right)
 	i := 0
 	j := 0
 	for i+j < hi-low {
-		fmt.Println(i, j)
 		if i == len(left) {
-			fmt.Println("finishing right")
 			for ; j < len(right); j++ {
 				list[low+i+j] = right[j]
-				return
 			}
+			return
 		}
 		if j == len(right) {
-			fmt.Println("finishing left")
 			for ; i < len(left); i++ {
 				list[low+i+j] = left[i]
-				return
 			}
+			return
 		}
 		leftVal := left[i]
 		rightVal := right[j]
 		if leftVal > rightVal {
-			fmt.Println("indisde j", list, low, i, j, right[j])
 			list[low+i+j] = right[j]
 			j++
 		} else {
-			fmt.Println("indisde i", list, low, i, j, left[i])
 			list[low+i+j] = left[i]
 			i++
 		}
