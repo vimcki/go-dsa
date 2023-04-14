@@ -86,7 +86,7 @@ func test(name string, s searcher, tests ...string) {
 		}
 	}
 	if !failed {
-		fmt.Printf("%s  was successful\n", name)
+		fmt.Printf("%s was successful\n", name)
 	}
 }
 
