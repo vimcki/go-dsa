@@ -6,6 +6,7 @@ import (
 	"sort"
 
 	"github.com/vimcki/go-dsa/internal/sorting/bubble"
+	"github.com/vimcki/go-dsa/internal/sorting/heap"
 	"github.com/vimcki/go-dsa/internal/sorting/merge"
 )
 
@@ -23,6 +24,8 @@ func Test() {
 	test("Bubble Sort", b)
 	m := merge.New()
 	test("Merge sort", m)
+	h := heap.New(heap.Max)
+	test("Heap sort", h)
 }
 
 func test(name string, s sorter, tests ...string) {
