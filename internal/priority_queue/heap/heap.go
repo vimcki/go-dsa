@@ -13,6 +13,7 @@ const (
 )
 
 type Heap struct {
+	list      []int
 	hType     Type
 	edgeValue int
 }
@@ -28,25 +29,54 @@ func New(hType Type) *Heap {
 	return &Heap{hType: hType, edgeValue: edgeValue}
 }
 
-func (h *Heap) Sort(list []int) {
-	h.buildHeap(list)
-	heapSize := len(list)
-	for i := len(list) - 1; i >= 0; i-- {
-		top := list[0]
-		list[0] = list[i]
-		list[i] = top
-		heapSize -= 1
-		h.heapify(list, i, 0)
+func (h *Heap) Insert(v int) {
+	h.list = append(h.list, v)
+	i := len(h.list) - 1
+	if i == 0 {
+		return
+	}
+	h.heapifyUp(i)
+}
+
+func (h *Heap) heapifyUp(i int) {
+	for {
+		i = parent(i)
+		h.heapify(i)
+		if i == 0 {
+			break
+		}
 	}
 }
 
-func (h *Heap) buildHeap(list []int) {
-	for i := len(list) / 2; i >= 0; i-- {
-		h.heapify(list, len(list), i)
+func (h *Heap) ExtractNext() int {
+	heapSize := len(h.list)
+	if heapSize == 0 {
+		return -1
+	}
+	if heapSize == 1 {
+		result := h.list[0]
+		h.list = []int{}
+		return result
+	}
+	result := h.list[0]
+	h.list[0] = h.list[heapSize-1]
+	h.list = h.list[:heapSize-1]
+	h.heapify(0)
+	return result
+}
+
+func (h *Heap) IncreaseKeyBy(key int, value int) {
+	for i, v := range h.list {
+		if v == key {
+			h.list[i] = key + value
+			h.heapifyUp(i)
+			break
+		}
 	}
 }
 
-func (h *Heap) heapify(list []int, heapSize, i int) {
+func (h *Heap) heapify(i int) {
+	heapSize := len(h.list)
 	if i >= heapSize {
 		return
 	}
@@ -58,18 +88,18 @@ func (h *Heap) heapify(list []int, heapSize, i int) {
 		return
 	}
 
-	val := list[i]
+	val := h.list[i]
 	var leftVal int
 
 	if left < heapSize {
-		leftVal = list[left]
+		leftVal = h.list[left]
 	} else {
 		leftVal = h.edgeValue
 	}
 
 	var rightVal int
 	if right < heapSize {
-		rightVal = list[right]
+		rightVal = h.list[right]
 	} else {
 		rightVal = h.edgeValue
 	}
@@ -87,9 +117,9 @@ func (h *Heap) heapify(list []int, heapSize, i int) {
 	}
 
 	if h.compare(val, destVal) {
-		list[dest] = val
-		list[i] = destVal
-		h.heapify(list, heapSize, dest)
+		h.list[dest] = val
+		h.list[i] = destVal
+		h.heapify(dest)
 	}
 }
 
@@ -104,6 +134,10 @@ func (h *Heap) compare(a, b int) bool {
 
 	}
 	return false
+}
+
+func parent(i int) int {
+	return (i - 1) / 2
 }
 
 func left(i int) int {
