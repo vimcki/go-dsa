@@ -48,12 +48,39 @@ func test(name string, q queue, tests ...string) {
 		return
 	}
 
-	q.IncreaseKeyBy(13, 20)
+	q.IncreaseKeyBy(2, 20)
 
 	v = q.ExtractNext()
 	if v != 33 {
 		fmt.Printf("test %s failed on v == 33\n", name)
 		return
 	}
+
+	v = q.ExtractNext()
+	if v != 15 {
+		fmt.Printf("test %s failed on v == 15\n", name)
+		return
+	}
+	v = q.ExtractNext()
+	if v != 12 {
+		fmt.Printf("test %s failed on v == 12\n", name)
+		return
+	}
+	v = q.ExtractNext()
+	if v != 11 {
+		fmt.Printf("test %s failed on v == 11\n", name)
+		return
+	}
+	v = q.ExtractNext()
+	if v != 10 {
+		fmt.Printf("test %s failed on v == 10\n", name)
+		return
+	}
+	v = q.ExtractNext()
+	if v != 1 {
+		fmt.Printf("test %s failed on v == 1\n", name)
+		return
+	}
+
 	fmt.Printf("%s was successful\n", name)
 }

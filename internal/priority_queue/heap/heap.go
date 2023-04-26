@@ -35,16 +35,12 @@ func (h *Heap) Insert(v int) {
 	if i == 0 {
 		return
 	}
-	h.heapifyUp(i)
-}
-
-func (h *Heap) heapifyUp(i int) {
-	for {
-		i = parent(i)
-		h.heapify(i)
-		if i == 0 {
-			break
+	for i != 0 {
+		p := parent(i)
+		if h.list[p] < h.list[i] {
+			h.list[p], h.list[i] = h.list[i], h.list[p]
 		}
+		i = p
 	}
 }
 
@@ -66,12 +62,15 @@ func (h *Heap) ExtractNext() int {
 }
 
 func (h *Heap) IncreaseKeyBy(key int, value int) {
-	for i, v := range h.list {
-		if v == key {
-			h.list[i] = key + value
-			h.heapifyUp(i)
-			break
+	i := key
+	h.list[i] = h.list[i] + value
+
+	for i != 0 {
+		p := parent(i)
+		if h.list[p] < h.list[i] {
+			h.list[p], h.list[i] = h.list[i], h.list[p]
 		}
+		i = p
 	}
 }
 
