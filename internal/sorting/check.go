@@ -8,6 +8,7 @@ import (
 	"github.com/vimcki/go-dsa/internal/sorting/bubble"
 	"github.com/vimcki/go-dsa/internal/sorting/heap"
 	"github.com/vimcki/go-dsa/internal/sorting/merge"
+	"github.com/vimcki/go-dsa/internal/sorting/quick"
 )
 
 type testCase struct {
@@ -26,6 +27,8 @@ func Test() {
 	test("Merge sort", m)
 	h := heap.New(heap.Max)
 	test("Heap sort", h)
+	q := quick.New()
+	test("Quick sort", q, "s1")
 }
 
 func test(name string, s sorter, tests ...string) {
