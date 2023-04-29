@@ -17,19 +17,16 @@ func quickSort(list []int, low, hi int) {
 	pivot := list[hi-1]
 	i := low
 	j := hi - 2
-	for {
+	for i != j {
 		for list[i] <= pivot && i < j {
 			i++
 		}
 		for list[j] > pivot && i < j {
 			j--
 		}
-		if i == j {
-			swap(list, j, hi-1)
-			break
-		}
 		swap(list, i, j)
 	}
+	swap(list, j, hi-1)
 	quickSort(list, low, i-1)
 	quickSort(list, i+1, hi)
 }
