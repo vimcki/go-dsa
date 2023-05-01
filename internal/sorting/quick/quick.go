@@ -7,26 +7,32 @@ func New() *QuickSorter {
 }
 
 func (b *QuickSorter) Sort(list []int) {
-	quickSort(list, 0, len(list))
+	quickSort(list, 0, len(list)-1)
 }
 
 func quickSort(list []int, low, hi int) {
-	if low <= hi {
+	if low >= hi {
 		return
 	}
-	pivot := list[hi-1]
+	pivot := list[hi]
 	i := low
-	j := hi - 2
-	for i != j {
-		for list[i] <= pivot && i < j {
+	j := hi - 1
+
+	for i <= j {
+		for i <= j && list[i] < pivot {
 			i++
 		}
-		for list[j] > pivot && i < j {
+		for i <= j && list[j] > pivot {
 			j--
 		}
-		swap(list, i, j)
+		if i <= j {
+			swap(list, i, j)
+			i++
+			j--
+		}
 	}
-	swap(list, j, hi-1)
+
+	swap(list, i, hi)
 	quickSort(list, low, i-1)
 	quickSort(list, i+1, hi)
 }

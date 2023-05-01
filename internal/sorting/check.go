@@ -6,6 +6,7 @@ import (
 	"sort"
 
 	"github.com/vimcki/go-dsa/internal/sorting/bubble"
+	"github.com/vimcki/go-dsa/internal/sorting/count"
 	"github.com/vimcki/go-dsa/internal/sorting/heap"
 	"github.com/vimcki/go-dsa/internal/sorting/merge"
 	"github.com/vimcki/go-dsa/internal/sorting/quick"
@@ -28,7 +29,9 @@ func Test() {
 	h := heap.New(heap.Max)
 	test("Heap sort", h)
 	q := quick.New()
-	test("Quick sort", q, "s1")
+	test("Quick sort", q)
+	c := count.New()
+	test("Count sort", c)
 }
 
 func test(name string, s sorter, tests ...string) {
@@ -39,7 +42,7 @@ func test(name string, s sorter, tests ...string) {
 		},
 		{
 			name: "s2",
-			list: []int{5, 4, 3, 2, 1},
+			list: []int{5, 5, 4, 3, 2, 1},
 		},
 		{
 			name: "s3",
