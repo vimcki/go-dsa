@@ -9,6 +9,7 @@ import (
 	"github.com/vimcki/go-dsa/internal/sorting/count"
 	"github.com/vimcki/go-dsa/internal/sorting/heap"
 	"github.com/vimcki/go-dsa/internal/sorting/merge"
+	"github.com/vimcki/go-dsa/internal/sorting/position"
 	"github.com/vimcki/go-dsa/internal/sorting/quick"
 )
 
@@ -32,6 +33,8 @@ func Test() {
 	test("Quick sort", q)
 	c := count.New()
 	test("Count sort", c)
+	p := position.New(c)
+	test("Position sort", p)
 }
 
 func test(name string, s sorter, tests ...string) {

@@ -33,3 +33,18 @@ func (b *CountSorter) Sort(list []int) {
 
 	copy(list, result)
 }
+
+func (b *CountSorter) SortPosition(list []int, pos uint) {
+	zeroes := make([]int, 0, len(list))
+	ones := make([]int, 0, len(list))
+	var mask int = 1 << pos
+	for _, item := range list {
+		if item&mask == 0 {
+			zeroes = append(zeroes, item)
+		} else {
+			ones = append(ones, item)
+		}
+	}
+	copy(list, zeroes)
+	copy(list[len(zeroes):], ones)
+}
