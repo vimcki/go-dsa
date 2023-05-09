@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/vimcki/go-dsa/internal/binarytree"
 	findMaxSubarray "github.com/vimcki/go-dsa/internal/find_max_subarray"
 	linkedlist "github.com/vimcki/go-dsa/internal/linked_list"
 	priorityqueue "github.com/vimcki/go-dsa/internal/priority_queue"
@@ -18,4 +19,8 @@ func main() {
 	stack.Test()
 	queue.Test()
 	linkedlist.Test()
+	binarytree.Test()
+	// map.Test()
+	// binary tree
+	// red black tree
 }
