@@ -19,8 +19,8 @@ func main() {
 	stack.Test()
 	queue.Test()
 	linkedlist.Test()
+	hashmap.Test()
 	binarytree.Test()
-	// map.Test()
 	// binary tree
 	// red black tree
 }
