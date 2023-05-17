@@ -55,13 +55,15 @@ func Test() {
 		},
 		{},
 	})
-	test("bfs from 0 to 5", b, 0, 5, []int{0, 1, 5})
-	test("bfs from 1 to 6", b, 0, 11, []int{0, 3, 8, 9, 11})
+	test("bfs from 0 to 5", b.Search, 0, 5, []int{0, 1, 5})
+	test("bfs from 0 to 11", b.Search, 0, 11, []int{0, 3, 8, 9, 11})
+	test("djikstra from 0 to 5", b.Djikstra, 0, 5, []int{0, 1, 2, 5})
+	test("djikstra from 1 to 11", b.Djikstra, 1, 11, []int{1, 2, 5, 10, 9, 11})
 }
 
-func test(name string, s searcher, from, to int, want []int) {
+func test(name string, s func(int, int) ([]int, error), from, to int, want []int) {
 	fmt.Printf("Running test: %s\n", name)
-	got, err := s.Search(from, to)
+	got, err := s(from, to)
 	if err != nil {
 		fmt.Printf("Search returned error: %v\n", err)
 		return
