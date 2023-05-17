@@ -21,6 +21,7 @@ func Test() {
 		{
 			{To: 2, Weight: 2},
 			{To: 4, Weight: 3},
+			{To: 5, Weight: 5},
 		},
 		{
 			{To: 5, Weight: 1},
@@ -54,8 +55,8 @@ func Test() {
 		},
 		{},
 	})
-	test("bfs from 0 to 5", b, 0, 5, []int{0, 1, 2, 5})
-	test("bfs from 1 to 6", b, 1, 11, []int{1, 2, 5, 10, 9, 11})
+	test("bfs from 0 to 5", b, 0, 5, []int{0, 1, 5})
+	test("bfs from 1 to 6", b, 0, 11, []int{0, 3, 8, 9, 11})
 }
 
 func test(name string, s searcher, from, to int, want []int) {
